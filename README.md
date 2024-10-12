@@ -58,4 +58,4 @@ details.
 
 #### Discussion
 
-Please refer to the following [list of OpenCore discussion forums](/Docs/FORUMS.md).
+`Please refer to the following [list of OpenCore discussion forums](/Docs/FORUMS.md).`
