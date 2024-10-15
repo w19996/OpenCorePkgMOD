@@ -2,7 +2,7 @@ name: Sync Fork
 
 on:  
   schedule:
-    - cron: '0 14 * * *'  # 每天北京时间11:30运行  
+    - cron: '0 14 * * *'
   workflow_dispatch:
 
 jobs:  
