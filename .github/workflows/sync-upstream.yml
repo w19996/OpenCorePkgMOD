@@ -2,7 +2,7 @@ name: Sync Fork
 
 on:  
   schedule:
-    - cron: '10 2 * * *'  # 每天北京时间10:10运行  
+    - cron: '10 3 * * *'  # 每天北京时间10:10运行  
   workflow_dispatch:
 
 jobs:  
@@ -21,8 +21,13 @@ jobs:
         run: git remote add upstream https://github.com/acidanthera/OpenCorePkg.git      
       - name: Fetch upstream        
         run: git fetch upstream      
+      - name: List remote branches        
+        run: git branch -r  # 确认 upstream/master 是否存在      
+      - name: Checkout local master branch        
+        run: git checkout master  # 确保处于本地 master 分支      
+      - name: Pull latest changes from origin        
+        run: git pull origin master  # 同步 fork 仓库的 master 分支      
       - name: Merge upstream changes        
-        run: git merge upstream/master --no-edit  # 如果默认分支是 master，请根据实际修改      
+        run: git merge upstream/master --no-edit  # 合并 upstream/master 到本地 master      
       - name: Push changes to fork        
-        run: |          
-          git push origin main
+        run: git push origin master  # 将更新后的内容推送到 fork
