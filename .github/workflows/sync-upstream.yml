@@ -2,7 +2,7 @@ name: Sync Fork
 
 on:  
   schedule:
-    - cron: '0 6 * * *'  # 每天北京时间11:30运行  
+    - cron: '40 6 * * *'  # 每天北京时间11:30运行  
   workflow_dispatch:
 
 jobs:  
@@ -28,7 +28,9 @@ jobs:
       - name: Pull latest changes from origin        
         run: git pull origin master  # 同步 fork 仓库的 master 分支      
       - name: Merge upstream changes        
-        run: git merge upstream/master --no-edit --allow-unrelated-histories -X theirs  # 合并并允许无关历史      
-      - name: Push changes to fork        
+        run: git merge upstream/master --no-edit --allow-unrelated-histories -X theirs  # 合并并允许无关历史 
+      - name: Set up authentication        
         run: |          
-          git push origin master  # 将更新后的内容推送到 fork
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/w19996/OpenCorePkgMOD.git  # 使用 GITHUB_TOKEN 进行身份验证
+      - name: Push changes to fork        
+        run: git push origin master  # 将更新后的内容推送到 fork
