@@ -2,7 +2,7 @@ name: Sync Fork
 
 on:  
   schedule:
-    - cron: '0 0 * * *'  # 每天午夜运行一次  
+    - cron: '10 2 * * *'  # 每天北京时间10:10运行  
   workflow_dispatch:
 
 jobs:  
@@ -22,7 +22,7 @@ jobs:
       - name: Fetch upstream        
         run: git fetch upstream      
       - name: Merge upstream changes        
-        run: git merge upstream/main --no-edit      
+        run: git merge upstream/master --no-edit  # 如果默认分支是 master，请根据实际修改      
       - name: Push changes to fork        
         run: |          
           git push origin main
